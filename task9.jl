@@ -72,5 +72,5 @@ function chess!(robot)
     return_to_start!(robot, x, y)
 end
 
-robot = Robot("test.sit", animate=true)
+robot = Robot("situations/test.sit", animate=true)
 chess!(robot)

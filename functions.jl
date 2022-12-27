@@ -21,13 +21,18 @@ end
 #возвращает робота в исходное положение
 function return_to_start!(robot, x, y)
     gotostart!(robot)
-    for i = 1:x
+    for i in 1:y
+        move!(robot, Nord)
+    end 
+    for i in 1:x
         move!(robot, Ost)
     end
-    for i = 1:y
-        move!(robot, Nord)
-    end
 end
+
+along!(robot::Robot,side::HorizonSide)::Nothing =
+    while !isborder(robot,side)
+        move!(robot,side)
+    end
 
 #робот движется в сторону до <условие>
 function along!(robot, side, num_steps)
@@ -97,5 +102,16 @@ function putmarkers!(robot::Robot,side::HorizonSide)::Nothing
         putmarker!(robot)
     end
 end
+
+function try_move!(robot, direct)::Bool
+    if isborder(robot, direct)
+        return false
+    end
+    move!(robot, direct)
+    return true
+end
+
+
+try_move!(robot, direct) = (!isborder(robot, direct) && (move!(robot, direct); return true); false)
 
 sides = [Nord, Ost, Sud, West]

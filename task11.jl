@@ -59,11 +59,11 @@ function count_wall!(robot)
             end
         end
         move!(robot, Nord)
-        side = inverse(side)Si
+        side = inverse(side)
     end
     return_to_start!(robot, x, y)
     return walls 
 end
 
-robot = Robot("test.sit", animate=true)
+robot = Robot("situations/11.sit", animate=true)
 count_wall!(robot)

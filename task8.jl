@@ -43,5 +43,5 @@ function spiral!(robot)
     end
 end
 
-robot = Robot("test.sit", animate=true)
+robot = Robot("situations/8.sit", animate=true)
 spiral!(robot)
