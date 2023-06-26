@@ -47,24 +47,28 @@ end
 
 # 4.Написать функцию, реализующую приближенное решение уравнения вида $f(x)=0$ методом деления отрезка пополам.
 
-function bisection(f::Function, a, b, epsilon)
-    @assert f(a)*f(b) < 0 
-    @assert a < b
-    f_a = f(a)
-    #ИНВАРИАНТ: f_a*f(b) < 0
-    while b-a > epsilon
-        t = (a+b)/2
-        f_t = f(t)
-        if f_t == 0
-            return t
-        elseif f_a*f_t < 0
-            b=t
+function SolveBisection(func::Function, left::Real, right::Real, epsilon::Real)::Real
+    @assert func(left) * func(right) < 0 
+    @assert left < right
+
+	# ИНВАРИАНТ: func(left) * f(right) < 0
+    while (right - left) > epsilon
+
+        mid = ( left + right ) / 2.0
+
+        if func(mid) == 0.0
+            return mid
+        elseif func(left) * func(mid) < 0
+            right = mid
         else
-            a, f_a = t, f_t
+            left = mid
         end
-    end
-    return (a+b)/2
+
+	end
+
+    return ( left + right ) / 2.0
 end
+
 
 #5. Найти приближенное решение уравнения cos(x) = x методом деления отрезка пополам.
 
